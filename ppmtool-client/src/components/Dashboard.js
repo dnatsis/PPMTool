@@ -1,7 +1,7 @@
 import React from 'react';
 import ProjectItem from './Project/ProjectItem';
-import { Container, Row, Col, Card, Button, ListGroup } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
+import CreateProjectButton from './Project/CreateProjectButton';
 
 const Dashboard = () => {
   return (
@@ -11,9 +11,7 @@ const Dashboard = () => {
           <Col md={12}>
             <h1 className="display-4 text-center">Projects</h1>
             <br />
-            <Button className="btn-lg" variant="info">
-              Create a Project
-            </Button>
+            <CreateProjectButton />
             <br />
             <hr />
 

@@ -39,7 +39,7 @@ const ProjectItem = () => {
                   </ListGroup.Item>
                   <ListGroup.Item>
                     <i
-                      class="fa fa-minus-circle pr-1"
+                      className="fa fa-minus-circle pr-1"
                       style={{ paddingRight: '10px' }}
                     ></i>
                     <Button className="btn-md" variant="danger">

@@ -7,7 +7,7 @@ const Header = () => {
     <header>
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container>
-          <LinkContainer to="Dashboard.html">
+          <LinkContainer to="/dashboard">
             <Navbar.Brand>PPMTool</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
