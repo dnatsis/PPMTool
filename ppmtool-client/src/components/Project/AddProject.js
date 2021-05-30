@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { createProjectAction } from '../../actions/projectActions';
+import Message from '../Message';
 
 import { CREATE_NEW_PROJECT_RESET } from '../../constants/projectConstants';
 
@@ -22,7 +23,7 @@ const AddProject = ({ history }) => {
       history.push('/dashboard');
       dispatch({ type: CREATE_NEW_PROJECT_RESET });
     }
-  }, [success, history, dispatch]);
+  }, [success, history, dispatch, error]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -39,7 +40,7 @@ const AddProject = ({ history }) => {
   };
 
   return (
-    <div>
+    <>
       <Container>
         <Row>
           <Col md={8} m-auto="true">
@@ -59,6 +60,7 @@ const AddProject = ({ history }) => {
                   onChange={(e) => setProjectName(e.target.value)}
                 ></Form.Control>
               </Form.Group>
+              {error && <Message variant="danger">{error.projectName}</Message>}
 
               <Form.Group controlId="projectId">
                 <Form.Label>Project ID</Form.Label>
@@ -71,6 +73,9 @@ const AddProject = ({ history }) => {
                   onChange={(e) => setProjectIdentifier(e.target.value)}
                 ></Form.Control>
               </Form.Group>
+              {error && (
+                <Message variant="danger">{error.projectIdentifier}</Message>
+              )}
 
               <Form.Group controlId="projectDescription">
                 <Form.Label>Project Description</Form.Label>
@@ -84,6 +89,7 @@ const AddProject = ({ history }) => {
                   onChange={(e) => setDescription(e.target.value)}
                 ></Form.Control>
               </Form.Group>
+              {error && <Message variant="danger">{error.description}</Message>}
 
               <Form.Group controlId="projectStartDate">
                 <Form.Label>Project Start Date</Form.Label>
@@ -120,7 +126,7 @@ const AddProject = ({ history }) => {
           </Col>
         </Row>
       </Container>
-    </div>
+    </>
   );
 };
 
