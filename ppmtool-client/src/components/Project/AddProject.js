@@ -1,12 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { createProjectAction } from '../../actions/projectActions';
 
-const AddProject = () => {
+import { CREATE_NEW_PROJECT_RESET } from '../../constants/projectConstants';
+
+const AddProject = ({ history }) => {
   const [projectName, setProjectName] = useState('');
   const [projectIdentifier, setProjectIdentifier] = useState('');
   const [description, setDescription] = useState('');
   const [start_date, setStart_Date] = useState('');
   const [end_date, setEnd_Date] = useState('');
+
+  const createProject = useSelector((state) => state.createProject);
+  const { success, error } = createProject;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (success) {
+      history.push('/dashboard');
+      dispatch({ type: CREATE_NEW_PROJECT_RESET });
+    }
+  }, [success, history, dispatch]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -17,7 +33,9 @@ const AddProject = () => {
       start_date: start_date,
       end_date: end_date,
     };
+    dispatch(createProjectAction(newProject));
     console.log(newProject);
+    console.log(error);
   };
 
   return (
