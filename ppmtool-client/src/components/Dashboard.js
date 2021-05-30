@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import ProjectItem from './Project/ProjectItem';
 import { Container, Row, Col } from 'react-bootstrap';
 import CreateProjectButton from './Project/CreateProjectButton';
+import { getProjectsAction } from '../actions/projectActions';
 
-const Dashboard = () => {
+const Dashboard = ({ history }) => {
+  const getProjects = useSelector((state) => state.getProjects);
+  const { success, error, projects } = getProjects;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProjectsAction());
+  }, [dispatch]);
+
   return (
     <>
       <Container>
@@ -14,8 +25,9 @@ const Dashboard = () => {
             <CreateProjectButton />
             <br />
             <hr />
-
-            <ProjectItem />
+            {projects.map((project) => (
+              <ProjectItem key={project.id} project={project} />
+            ))}
           </Col>
         </Row>
       </Container>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Card, Button, ListGroup } from 'react-bootstrap';
 
-const ProjectItem = () => {
+const ProjectItem = ({ project }) => {
   return (
     <>
       <Container>
@@ -9,13 +9,11 @@ const ProjectItem = () => {
           <Card.Body>
             <Row>
               <Col md={2}>
-                <span className="mx-auto">REACT</span>
+                <span className="mx-auto">{project.projectIdentifier}</span>
               </Col>
               <Col lg={6} md={4}>
-                <Card.Title>Spring / React Project</Card.Title>
-                <Card.Text>
-                  Project to create a kanban board with spring boot and react
-                </Card.Text>
+                <Card.Title>{project.projectName}</Card.Title>
+                <Card.Text>{project.description}</Card.Text>
               </Col>
               <Col md={4} className="d-none d-lg-block">
                 <ListGroup variant="flush">
