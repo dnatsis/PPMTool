@@ -6,6 +6,9 @@ import {
   GET_PROJECTS_FAIL,
   GET_PROJECTS_REQUEST,
   GET_PROJECTS_SUCCESS,
+  GET_PROJECT_BY_ID_REQUEST,
+  GET_PROJECT_BY_ID_SUCCESS,
+  GET_PROJECT_BY_ID_FAIL,
 } from '../constants/projectConstants';
 
 export const createProjectAction = (project) => async (dispatch) => {
@@ -42,6 +45,24 @@ export const getProjectsAction = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_PROJECTS_FAIL,
+      payload: error.response.data,
+    });
+  }
+};
+
+export const getProjectByIdAction = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: GET_PROJECT_BY_ID_REQUEST });
+
+    const { data } = await axios.get(`http://localhost:8080/api/project/${id}`);
+
+    dispatch({
+      type: GET_PROJECT_BY_ID_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_PROJECT_BY_ID_FAIL,
       payload: error.response.data,
     });
   }

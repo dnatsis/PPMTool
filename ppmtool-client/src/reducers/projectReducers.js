@@ -6,6 +6,10 @@ import {
   GET_PROJECTS_FAIL,
   GET_PROJECTS_REQUEST,
   GET_PROJECTS_SUCCESS,
+  GET_PROJECT_BY_ID_FAIL,
+  GET_PROJECT_BY_ID_REQUEST,
+  GET_PROJECT_BY_ID_RESET,
+  GET_PROJECT_BY_ID_SUCCESS,
 } from '../constants/projectConstants';
 
 export const createProjectReducer = (state = { project: {} }, action) => {
@@ -26,11 +30,26 @@ export const createProjectReducer = (state = { project: {} }, action) => {
 export const getProjectsReducer = (state = { projects: [] }, action) => {
   switch (action.type) {
     case GET_PROJECTS_REQUEST:
-      return { loading: true, projects: [] };
+      return { loading: true, ...state };
     case GET_PROJECTS_SUCCESS:
       return { loading: false, projects: action.payload };
     case GET_PROJECTS_FAIL:
       return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const getProjectByIdReducer = (state = { project: {} }, action) => {
+  switch (action.type) {
+    case GET_PROJECT_BY_ID_REQUEST:
+      return { loading: true, ...state };
+    case GET_PROJECT_BY_ID_SUCCESS:
+      return { loading: false, project: action.payload };
+    case GET_PROJECT_BY_ID_FAIL:
+      return { loading: false, error: action.payload };
+    case GET_PROJECT_BY_ID_RESET:
+      return { project: {} };
     default:
       return state;
   }

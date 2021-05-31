@@ -60,7 +60,9 @@ const AddProject = ({ history }) => {
                   onChange={(e) => setProjectName(e.target.value)}
                 ></Form.Control>
               </Form.Group>
-              {error && <Message variant="danger">{error.projectName}</Message>}
+              {error && error.projectName && (
+                <Message variant="danger">{error.projectName}</Message>
+              )}
 
               <Form.Group controlId="projectId">
                 <Form.Label>Project ID</Form.Label>
@@ -73,7 +75,7 @@ const AddProject = ({ history }) => {
                   onChange={(e) => setProjectIdentifier(e.target.value)}
                 ></Form.Control>
               </Form.Group>
-              {error && (
+              {error && error.projectIdentifier && (
                 <Message variant="danger">{error.projectIdentifier}</Message>
               )}
 
@@ -89,7 +91,9 @@ const AddProject = ({ history }) => {
                   onChange={(e) => setDescription(e.target.value)}
                 ></Form.Control>
               </Form.Group>
-              {error && <Message variant="danger">{error.description}</Message>}
+              {error && error.description && (
+                <Message variant="danger">{error.description}</Message>
+              )}
 
               <Form.Group controlId="projectStartDate">
                 <Form.Label>Project Start Date</Form.Label>

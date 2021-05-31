@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Container, Row, Col, Card, Button, ListGroup } from 'react-bootstrap';
 
 const ProjectItem = ({ project }) => {
@@ -31,9 +32,11 @@ const ProjectItem = ({ project }) => {
                       className="fa fa-edit pr-1"
                       style={{ paddingRight: '10px' }}
                     ></i>
-                    <Button className="btn-md" variant="success">
-                      Update Project Info
-                    </Button>
+                    <Link to={`/updateProject/${project.projectIdentifier}`}>
+                      <Button className="btn-md" variant="success">
+                        Update Project Info
+                      </Button>
+                    </Link>
                   </ListGroup.Item>
                   <ListGroup.Item>
                     <i

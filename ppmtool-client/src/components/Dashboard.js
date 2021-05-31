@@ -4,15 +4,17 @@ import ProjectItem from './Project/ProjectItem';
 import { Container, Row, Col } from 'react-bootstrap';
 import CreateProjectButton from './Project/CreateProjectButton';
 import { getProjectsAction } from '../actions/projectActions';
+import { CREATE_NEW_PROJECT_RESET } from '../constants/projectConstants';
 
-const Dashboard = ({ history }) => {
+const Dashboard = () => {
   const getProjects = useSelector((state) => state.getProjects);
-  const { success, error, projects } = getProjects;
+  const { error, projects } = getProjects;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getProjectsAction());
+    dispatch({ type: CREATE_NEW_PROJECT_RESET });
   }, [dispatch]);
 
   return (

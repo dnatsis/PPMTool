@@ -4,11 +4,13 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import {
   createProjectReducer,
   getProjectsReducer,
+  getProjectByIdReducer,
 } from './reducers/projectReducers';
 
 const reducer = combineReducers({
   createProject: createProjectReducer,
   getProjects: getProjectsReducer,
+  getProjectById: getProjectByIdReducer,
 });
 
 const initialState = {};
