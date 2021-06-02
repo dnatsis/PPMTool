@@ -9,6 +9,9 @@ import {
   GET_PROJECT_BY_ID_REQUEST,
   GET_PROJECT_BY_ID_SUCCESS,
   GET_PROJECT_BY_ID_FAIL,
+  DELETE_PROJECT_REQUEST,
+  DELETE_PROJECT_SUCCESS,
+  DELETE_PROJECT_FAIL,
 } from '../constants/projectConstants';
 
 export const createProjectAction = (project) => async (dispatch) => {
@@ -65,5 +68,17 @@ export const getProjectByIdAction = (id) => async (dispatch) => {
       type: GET_PROJECT_BY_ID_FAIL,
       payload: error.response.data,
     });
+  }
+};
+
+export const deleteProjectAction = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: DELETE_PROJECT_REQUEST });
+
+    await axios.delete(`http://localhost:8080/api/project/${id}`);
+
+    dispatch({ type: DELETE_PROJECT_SUCCESS });
+  } catch (error) {
+    dispatch({ type: DELETE_PROJECT_FAIL, payload: error.response.data });
   }
 };

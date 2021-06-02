@@ -3,6 +3,10 @@ import {
   CREATE_NEW_PROJECT_REQUEST,
   CREATE_NEW_PROJECT_RESET,
   CREATE_NEW_PROJECT_SUCCESS,
+  DELETE_PROJECT_FAIL,
+  DELETE_PROJECT_REQUEST,
+  DELETE_PROJECT_SUCCESS,
+  DELETE_PROJECT_RESET,
   GET_PROJECTS_FAIL,
   GET_PROJECTS_REQUEST,
   GET_PROJECTS_SUCCESS,
@@ -50,6 +54,19 @@ export const getProjectByIdReducer = (state = { project: {} }, action) => {
       return { loading: false, error: action.payload };
     case GET_PROJECT_BY_ID_RESET:
       return { project: {} };
+    default:
+      return state;
+  }
+};
+
+export const deleteProjectReducer = (state = {}, action) => {
+  switch (action.type) {
+    case DELETE_PROJECT_REQUEST:
+      return { loading: true };
+    case DELETE_PROJECT_SUCCESS:
+      return { loading: false, success: true };
+    case DELETE_PROJECT_FAIL:
+      return { loading: false, error: action.payload };
     default:
       return state;
   }

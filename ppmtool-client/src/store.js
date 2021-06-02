@@ -5,12 +5,14 @@ import {
   createProjectReducer,
   getProjectsReducer,
   getProjectByIdReducer,
+  deleteProjectReducer,
 } from './reducers/projectReducers';
 
 const reducer = combineReducers({
   createProject: createProjectReducer,
   getProjects: getProjectsReducer,
   getProjectById: getProjectByIdReducer,
+  deleteProject: deleteProjectReducer,
 });
 
 const initialState = {};

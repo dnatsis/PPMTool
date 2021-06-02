@@ -8,14 +8,20 @@ import { CREATE_NEW_PROJECT_RESET } from '../constants/projectConstants';
 
 const Dashboard = () => {
   const getProjects = useSelector((state) => state.getProjects);
-  const { error, projects } = getProjects;
+  const { projects } = getProjects;
+
+  const deleteProject = useSelector((state) => state.deleteProject);
+  const { success } = deleteProject;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (success) {
+      dispatch(getProjectsAction());
+    }
     dispatch(getProjectsAction());
     dispatch({ type: CREATE_NEW_PROJECT_RESET });
-  }, [dispatch]);
+  }, [dispatch, success]);
 
   return (
     <>

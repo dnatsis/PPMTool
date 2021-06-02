@@ -1,8 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Container, Row, Col, Card, Button, ListGroup } from 'react-bootstrap';
+import { deleteProjectAction } from '../../actions/projectActions';
 
-const ProjectItem = ({ project }) => {
+const ProjectItem = ({ history, project }) => {
+  const dispatch = useDispatch();
+
+  const deleteHandler = (id) => {
+    if (window.confirm('Are you sure you want to delete the Project?')) {
+      dispatch(deleteProjectAction(id));
+    }
+  };
+
   return (
     <>
       <Container>
@@ -43,7 +53,11 @@ const ProjectItem = ({ project }) => {
                       className="fa fa-minus-circle pr-1"
                       style={{ paddingRight: '10px' }}
                     ></i>
-                    <Button className="btn-md" variant="danger">
+                    <Button
+                      className="btn-md"
+                      variant="danger"
+                      onClick={() => deleteHandler(project.projectIdentifier)}
+                    >
                       Delete Project
                     </Button>
                   </ListGroup.Item>
