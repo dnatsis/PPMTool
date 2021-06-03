@@ -26,11 +26,12 @@ public class ProjectTaskService {
         Integer BacklogSequence = backlog.getPTSequence();
         //Increment the Sequence
         BacklogSequence++;
+        backlog.setPTSequence(BacklogSequence);
         //Add Sequence to Project Task
         projectTask.setProjectSequence(projectIdentifier+"-"+BacklogSequence);
         projectTask.setProjectIdentifier(projectIdentifier);
         //Initial priority when null
-        if(projectTask.getPriority()==0 || projectTask.getPriority()==null) {
+        if(projectTask.getPriority()==null) {
           projectTask.setPriority(3);
         }
         //Initial status when nulll
