@@ -1,9 +1,11 @@
 package com.dhimitrisprojects.ppmtool.services;
 
 import com.dhimitrisprojects.ppmtool.domain.Backlog;
+import com.dhimitrisprojects.ppmtool.domain.Project;
 import com.dhimitrisprojects.ppmtool.domain.ProjectTask;
 import com.dhimitrisprojects.ppmtool.exceptions.ProjectNotFoundException;
 import com.dhimitrisprojects.ppmtool.repositories.BacklogRepository;
+import com.dhimitrisprojects.ppmtool.repositories.ProjectRepository;
 import com.dhimitrisprojects.ppmtool.repositories.ProjectTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,9 @@ public class ProjectTaskService {
 
     @Autowired
     private ProjectTaskRepository projectTaskRepository;
+
+    @Autowired
+    private ProjectRepository projectRepository;
 
     public ProjectTask addProjectTask(String projectIdentifier, ProjectTask projectTask){
         try {
@@ -50,6 +55,35 @@ public class ProjectTaskService {
     }
 
     public Iterable<ProjectTask>findBacklogById(String backlog_id) {
+
+        Project project = projectRepository.findByProjectIdentifier(backlog_id);
+
+        if(project==null){
+            throw new ProjectNotFoundException("Project With ID: '"+backlog_id+"' does not exist");
+        }
+
         return projectTaskRepository.findByProjectIdentifierOrderByPriority(backlog_id);
+    }
+
+    public ProjectTask findProjectTaskByProjectSequence(String backlog_id,String pt_id){
+        //make sure were looking in the correct backlog
+        Backlog backlog = backlogRepository.findByProjectIdentifier(backlog_id);
+        if(backlog==null){
+            throw new ProjectNotFoundException("Project with ID: '"+backlog_id+" does not exist");
+        }
+
+        //make sure task exists
+        ProjectTask projectTask = projectTaskRepository.findByProjectSequence(pt_id);
+
+        if(projectTask==null){
+            throw new ProjectNotFoundException("Project Task: '"+pt_id+"' not found");
+        }
+
+        //make sure project id in path is for the right project
+        if(!projectTask.getProjectIdentifier().equals(backlog_id)){
+            throw new ProjectNotFoundException("Project Task: '"+pt_id+"' does not exist in project: '"+backlog_id);
+        }
+
+        return projectTask;
     }
 }
