@@ -33,9 +33,11 @@ const ProjectItem = ({ history, project }) => {
                       className="fas fa-project-diagram"
                       style={{ paddingRight: '10px' }}
                     ></i>
-                    <Button className="btn-md" variant="primary">
-                      Project Board
-                    </Button>
+                    <Link to={`/projectBoard/${project.projectIdentifier}`}>
+                      <Button className="btn-md" variant="primary">
+                        Project Board
+                      </Button>
+                    </Link>
                   </ListGroup.Item>
                   <ListGroup.Item>
                     <i

@@ -18,10 +18,7 @@ export const createProjectAction = (project) => async (dispatch) => {
   try {
     dispatch({ type: CREATE_NEW_PROJECT_REQUEST });
 
-    const { data } = await axios.post(
-      `http://localhost:8080/api/project`,
-      project
-    );
+    const { data } = await axios.post(`/api/project`, project);
 
     dispatch({
       type: CREATE_NEW_PROJECT_SUCCESS,
@@ -39,7 +36,7 @@ export const getProjectsAction = () => async (dispatch) => {
   try {
     dispatch({ type: GET_PROJECTS_REQUEST });
 
-    const { data } = await axios.get('http://localhost:8080/api/project/all');
+    const { data } = await axios.get('/api/project/all');
 
     dispatch({
       type: GET_PROJECTS_SUCCESS,
@@ -57,7 +54,7 @@ export const getProjectByIdAction = (id) => async (dispatch) => {
   try {
     dispatch({ type: GET_PROJECT_BY_ID_REQUEST });
 
-    const { data } = await axios.get(`http://localhost:8080/api/project/${id}`);
+    const { data } = await axios.get(`/api/project/${id}`);
 
     dispatch({
       type: GET_PROJECT_BY_ID_SUCCESS,
@@ -75,7 +72,7 @@ export const deleteProjectAction = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_PROJECT_REQUEST });
 
-    await axios.delete(`http://localhost:8080/api/project/${id}`);
+    await axios.delete(`/api/project/${id}`);
 
     dispatch({ type: DELETE_PROJECT_SUCCESS });
   } catch (error) {

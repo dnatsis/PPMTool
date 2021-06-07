@@ -7,10 +7,7 @@ import {
 } from '../../actions/projectActions';
 import Message from '../Message';
 
-import {
-  CREATE_NEW_PROJECT_RESET,
-  GET_PROJECT_BY_ID_RESET,
-} from '../../constants/projectConstants';
+import { CREATE_NEW_PROJECT_RESET } from '../../constants/projectConstants';
 
 const UpdateProject = ({ history, match }) => {
   const id = match.params.id;
@@ -28,12 +25,7 @@ const UpdateProject = ({ history, match }) => {
   const { success, error } = createProject;
 
   const getProjectById = useSelector((state) => state.getProjectById);
-  const {
-    loading,
-    success: successGetProjectById,
-    error: errorGetProjectById,
-    project,
-  } = getProjectById;
+  const { loading, project } = getProjectById;
 
   function isEmpty(object) {
     return Object.keys(object).length === 0;
