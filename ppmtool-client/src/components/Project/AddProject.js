@@ -44,9 +44,7 @@ const AddProject = ({ history }) => {
       <Container>
         <Row>
           <Col md={8} m-auto="true">
-            <h5 className="display-4 text-center">
-              Create / Edit Project form
-            </h5>
+            <h5 className="display-4 text-center">Create Project</h5>
             <hr />
             <Form onSubmit={submitHandler}>
               <Form.Group controlId="projectName">

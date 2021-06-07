@@ -11,6 +11,7 @@ import {
   getProjectBacklogReducer,
   getProjectTaskReducer,
   deleteProjectTaskReducer,
+  addProjectTaskReducer,
 } from './reducers/backlogReducers';
 
 const reducer = combineReducers({
@@ -21,6 +22,7 @@ const reducer = combineReducers({
   getProjectBacklog: getProjectBacklogReducer,
   getProjectTask: getProjectTaskReducer,
   deleteProjectTask: deleteProjectTaskReducer,
+  addProjectTask: addProjectTaskReducer,
 });
 
 const initialState = {};
