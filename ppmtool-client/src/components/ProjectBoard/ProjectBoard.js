@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { ADD_PROJECT_TASK_RESET } from '../../constants/projectConstants';
 
 const ProjectBoard = ({ match }) => {
   const id = match.params.id;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: ADD_PROJECT_TASK_RESET });
+  }, [dispatch]);
   return (
     <>
       <Container>

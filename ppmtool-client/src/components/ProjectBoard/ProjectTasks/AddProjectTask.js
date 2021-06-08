@@ -4,6 +4,7 @@ import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { ADD_PROJECT_TASK_RESET } from '../../../constants/projectConstants';
 import { addProjectTaskAction } from '../../../actions/backlogActions';
+import Message from '../../Message';
 
 const AddProjectTask = ({ match, history }) => {
   const [projectTaskSummary, setProjectTaskSummary] = useState('');
@@ -66,6 +67,9 @@ const AddProjectTask = ({ match, history }) => {
                   onChange={(e) => setProjectTaskSummary(e.target.value)}
                 ></Form.Control>
               </Form.Group>
+              {error && error.summary && (
+                <Message variant="danger">{error.summary}</Message>
+              )}
 
               <Form.Group controlId="projectTaskAcceptanceCriteria">
                 <Form.Label>Acceptance Criteria</Form.Label>
