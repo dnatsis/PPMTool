@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Container, Button } from 'react-bootstrap';
 import { ADD_PROJECT_TASK_RESET } from '../../constants/projectConstants';
 import Backlog from './Backlog';

@@ -22,7 +22,7 @@ const UpdateProjectTask = ({ match, history }) => {
   const { success, error } = updateProjectTask;
 
   const getProjectTask = useSelector((state) => state.getProjectTask);
-  const { projectTask, loading } = getProjectTask;
+  const { projectTask, loading, error: getProjectTaskError } = getProjectTask;
 
   const dispatch = useDispatch();
 
@@ -34,11 +34,12 @@ const UpdateProjectTask = ({ match, history }) => {
       history.push(`/projectBoard/${id}`);
       dispatch({ type: UPDATE_PROJECT_TASK_RESET });
     } else {
-      if (!projectTask.summary || projectTask.projectSequence !== pt_id) {
+      if (!projectTask || projectTask.projectSequence !== pt_id) {
         dispatch(getProjectTaskAction(id, pt_id));
       } else {
         console.log(projectTask.projectSequence);
-        setProjectTaskSummary(projectTask.summary);
+        if (projectTask.summary !== null)
+          setProjectTaskSummary(projectTask.summary);
         if (projectTask.acceptanceCriteria !== null)
           setProjectTaskAcceptanceCriteria(projectTask.acceptanceCriteria);
         if (projectTask.dueDate !== null)
@@ -73,6 +74,10 @@ const UpdateProjectTask = ({ match, history }) => {
     <>
       {loading ? (
         <Loader />
+      ) : getProjectTaskError ? (
+        <Message variant="danger">
+          {getProjectTaskError.projectNotFound}
+        </Message>
       ) : (
         <Container>
           <Row>
@@ -83,10 +88,12 @@ const UpdateProjectTask = ({ match, history }) => {
                 </Button>
               </Link>
               <h4 className="display-4 text-center">Update Project Task</h4>
-              <p className="lead text-center">
-                Project: {projectTask.projectIdentifier} || Project Task:{' '}
-                {projectTask.projectSequence}
-              </p>
+              {projectTask && (
+                <p className="lead text-center">
+                  Project: {projectTask.projectIdentifier} || Project Task:{' '}
+                  {projectTask.projectSequence}
+                </p>
+              )}
               <Form onSubmit={submitHandler}>
                 <Form.Group controlId="projectTaskSummary">
                   <Form.Label>Project Task Summary</Form.Label>

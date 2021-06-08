@@ -12,9 +12,15 @@ const Backlog = ({ id }) => {
   const getProjectBacklog = useSelector((state) => state.getProjectBacklog);
   const { backlog, loading, error } = getProjectBacklog;
 
+  const deleteProjectTask = useSelector((state) => state.deleteProjectTask);
+  const { success } = deleteProjectTask;
+
   useEffect(() => {
+    if (success) {
+      dispatch(getProjectTasksAction(id));
+    }
     dispatch(getProjectTasksAction(id));
-  }, [dispatch, id]);
+  }, [dispatch, id, success]);
 
   let todoItems;
   let inProgressItems;
@@ -24,19 +30,34 @@ const Backlog = ({ id }) => {
     todoItems = backlog
       .filter((projectTask) => projectTask.status === 'TO_DO')
       .map((projectTask) => (
-        <ProjectTask key={projectTask.id} projectTask={projectTask} />
+        <ProjectTask
+          key={projectTask.id}
+          projectTask={projectTask}
+          backlog_id={projectTask.projectIdentifier}
+          pt_id={projectTask.projectSequence}
+        />
       ));
 
     inProgressItems = backlog
       .filter((projectTask) => projectTask.status === 'IN_PROGRESS')
       .map((projectTask) => (
-        <ProjectTask key={projectTask.id} projectTask={projectTask} />
+        <ProjectTask
+          key={projectTask.id}
+          projectTask={projectTask}
+          backlog_id={projectTask.projectIdentifier}
+          pt_id={projectTask.projectSequence}
+        />
       ));
 
     doneItems = backlog
       .filter((projectTask) => projectTask.status === 'DONE')
       .map((projectTask) => (
-        <ProjectTask key={projectTask.id} projectTask={projectTask} />
+        <ProjectTask
+          key={projectTask.id}
+          projectTask={projectTask}
+          backlog_id={projectTask.projectIdentifier}
+          pt_id={projectTask.projectSequence}
+        />
       ));
   }
 

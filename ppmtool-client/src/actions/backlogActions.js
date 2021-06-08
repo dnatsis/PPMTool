@@ -3,6 +3,9 @@ import {
   ADD_PROJECT_TASK_FAIL,
   ADD_PROJECT_TASK_REQUEST,
   ADD_PROJECT_TASK_SUCCESS,
+  DELETE_PROJECT_TASK_FAIL,
+  DELETE_PROJECT_TASK_REQUEST,
+  DELETE_PROJECT_TASK_SUCCESS,
   GET_PROJECT_BACKLOG_FAIL,
   GET_PROJECT_BACKLOG_REQUEST,
   GET_PROJECT_BACKLOG_SUCCESS,
@@ -89,6 +92,22 @@ export const updateProjectTaskAction =
     } catch (error) {
       dispatch({
         type: UPDATE_PROJECT_TASK_FAIL,
+        payload: error.response.data,
+      });
+    }
+  };
+
+export const deleteProjectTaskAction =
+  (backlog_id, pt_id) => async (dispatch) => {
+    try {
+      dispatch({ type: DELETE_PROJECT_TASK_REQUEST });
+
+      await axios.delete(`/api/backlog/${backlog_id}/${pt_id}`);
+
+      dispatch({ type: DELETE_PROJECT_TASK_SUCCESS });
+    } catch (error) {
+      dispatch({
+        type: DELETE_PROJECT_TASK_FAIL,
         payload: error.response.data,
       });
     }

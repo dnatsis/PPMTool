@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Button } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { deleteProjectTaskAction } from '../../../actions/backlogActions';
 
-const ProjectTask = ({ projectTask }) => {
+const ProjectTask = ({ projectTask, backlog_id, pt_id }) => {
   let priorityString;
   let priorityClass;
 
@@ -16,6 +18,14 @@ const ProjectTask = ({ projectTask }) => {
     priorityClass = 'bg-info text-light';
     priorityString = 'LOW';
   }
+
+  const dispatch = useDispatch();
+
+  const deleteHandler = (id, pt_id) => {
+    if (window.confirm('Are you sure you want to delete the Project Task?')) {
+      dispatch(deleteProjectTaskAction(id, pt_id));
+    }
+  };
 
   return (
     <>
@@ -34,8 +44,13 @@ const ProjectTask = ({ projectTask }) => {
             <Button className="btn-primary" variant="primary">
               View / Update
             </Button>
-            <Button className="btn-danger ms-4">Delete</Button>
           </Link>
+          <Button
+            className="btn-danger ms-4"
+            onClick={() => deleteHandler(backlog_id, pt_id)}
+          >
+            Delete
+          </Button>
         </Card.Body>
       </Card>
     </>
