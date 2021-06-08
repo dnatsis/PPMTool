@@ -8,6 +8,7 @@ import {
 import Message from '../Message';
 
 import { CREATE_NEW_PROJECT_RESET } from '../../constants/projectConstants';
+import Loader from '../Loader';
 
 const UpdateProject = ({ history, match }) => {
   const id = match.params.id;
@@ -68,7 +69,7 @@ const UpdateProject = ({ history, match }) => {
   return (
     <>
       {loading ? (
-        <p>loading...</p>
+        <Loader />
       ) : (
         <Container>
           <Row>

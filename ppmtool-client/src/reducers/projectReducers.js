@@ -11,7 +11,6 @@ import {
   GET_PROJECTS_SUCCESS,
   GET_PROJECT_BY_ID_FAIL,
   GET_PROJECT_BY_ID_REQUEST,
-  GET_PROJECT_BY_ID_RESET,
   GET_PROJECT_BY_ID_SUCCESS,
 } from '../constants/projectConstants';
 
@@ -51,8 +50,7 @@ export const getProjectByIdReducer = (state = { project: {} }, action) => {
       return { loading: false, project: action.payload };
     case GET_PROJECT_BY_ID_FAIL:
       return { loading: false, error: action.payload };
-    case GET_PROJECT_BY_ID_RESET:
-      return { project: {} };
+
     default:
       return state;
   }

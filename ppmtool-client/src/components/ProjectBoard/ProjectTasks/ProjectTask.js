@@ -28,7 +28,9 @@ const ProjectTask = ({ projectTask }) => {
           <Card.Text className="text-truncate">
             {projectTask.acceptanceCriteria}
           </Card.Text>
-          <Link to={`/projectBoard`}>
+          <Link
+            to={`/updateProjectTask/${projectTask.projectIdentifier}/${projectTask.projectSequence}`}
+          >
             <Button className="btn-primary" variant="primary">
               View / Update
             </Button>

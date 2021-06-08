@@ -54,7 +54,6 @@ const AddProjectTask = ({ match, history }) => {
               </Button>
             </Link>
             <h4 className="display-4 text-center">Add Project Task</h4>
-            <p className="lead text-center">Project Name + Project Code</p>
             <Form onSubmit={submitHandler}>
               <Form.Group controlId="projectTaskSummary">
                 <Form.Label>Project Task Summary</Form.Label>

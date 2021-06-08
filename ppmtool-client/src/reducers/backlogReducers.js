@@ -12,6 +12,10 @@ import {
   ADD_PROJECT_TASK_SUCCESS,
   ADD_PROJECT_TASK_FAIL,
   ADD_PROJECT_TASK_RESET,
+  UPDATE_PROJECT_TASK_REQUEST,
+  UPDATE_PROJECT_TASK_SUCCESS,
+  UPDATE_PROJECT_TASK_FAIL,
+  UPDATE_PROJECT_TASK_RESET,
 } from '../constants/projectConstants';
 
 export const getProjectBacklogReducer = (state = { backlog: [] }, action) => {
@@ -62,6 +66,24 @@ export const addProjectTaskReducer = (state = { projectTask: {} }, action) => {
     case ADD_PROJECT_TASK_FAIL:
       return { loading: false, error: action.payload };
     case ADD_PROJECT_TASK_RESET:
+      return { projectTask: {} };
+    default:
+      return state;
+  }
+};
+
+export const updateProjectTaskReducer = (
+  state = { projectTask: {} },
+  action
+) => {
+  switch (action.type) {
+    case UPDATE_PROJECT_TASK_REQUEST:
+      return { loading: true };
+    case UPDATE_PROJECT_TASK_SUCCESS:
+      return { loading: false, success: true, projectTask: action.payload };
+    case UPDATE_PROJECT_TASK_FAIL:
+      return { loading: false, error: action.payload };
+    case UPDATE_PROJECT_TASK_RESET:
       return { projectTask: {} };
     default:
       return state;
